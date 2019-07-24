@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 
-const TeamForm = () => {
+const TeamForm = props => {
+    const { teamMember, setTeamMember, team, setTeam } = props;
+
+    const changeHandler = event => {
+        const updatedMember = { ...teamMember, [event.target.name]: event.target.value };
+        setTeamMember(updatedMember);
+    };
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        console.log('Team Member', teamMember);
+        return setTeam([...team, teamMember]);
+    }
+
     return (
-        <form>
+        <form onSubmit={ handleSubmit }>
             <fieldset>
                 <legend>Team Signup</legend>
                 <div>
                     <label for='username'>
-                        Team Member Name
+                        Name
                         <div>
                             <input
                                 type='text'
-                                placeholder='Enter your name' 
+                                name='username'
+                                placeholder='Enter your name'
+                                value={ teamMember.username }
+                                onChange={ changeHandler }
                             />
                         </div>
                     </label>
@@ -22,23 +38,35 @@ const TeamForm = () => {
                         <div>
                             <input
                                 type='email'
+                                name='email'
                                 placeholder='Enter email'
+                                value={ teamMember.email }
+                                onChange={ changeHandler }
+
                             />
                         </div>
                     </label>
                 </div>
                 <div>
                     <label for='role'>
-                        Team Member Role
+                        Role
                         <div>
                             <input
                                 type='text'
+                                name='role'
                                 placeholder='Enter role'
+                                value={ teamMember.role }
+                                onChange={ changeHandler }
                             />
                         </div>
                     </label>
                 </div>
+                <button type="submit" className="btn btn-primary">
+                    Submit
+                </button>
             </fieldset>
         </form>
     )
 }
+
+export default TeamForm;

@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TeamForm from './Form.js';
+import TeamMembers from './TeamMembers.js';
+import { getMaxListeners } from 'cluster';
 
 function App() {
-  const [username, setUsername] = useState('Penny Tague');
+  const [teamMember, setTeamMember] = useState({ username: '', email: '', role: '' });
+
+  const [team, setTeam] = useState([{ username: 'Penny', email: 'pmtague9@gmail.com', role: 'Front End Developer' }]);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome Team!</h1>
+      <TeamForm />
+      <div>
+        <TeamMembers />
+      </div>
     </div>
   );
 }
