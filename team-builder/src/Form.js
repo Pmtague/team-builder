@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
 const TeamForm = props => {
-    const { teamMember, setTeamMember, team, setTeam } = props;
 
     const changeHandler = event => {
-        const updatedMember = { ...teamMember, [event.target.name]: event.target.value };
-        setTeamMember(updatedMember);
+        const updatedMember = { ...props.teamMember, [event.target.name]: event.target.value };
+        props.setTeamMember(updatedMember);
     };
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log('Team Member', teamMember);
-        return setTeam([...team, teamMember]);
+        console.log('Team Member', props.teamMember);
+        return props.setTeam([...props.team, props.teamMember]);
     }
 
     return (
@@ -26,7 +25,7 @@ const TeamForm = props => {
                                 type='text'
                                 name='username'
                                 placeholder='Enter your name'
-                                value={ teamMember.username }
+                                value={ props.teamMember.username }
                                 onChange={ changeHandler }
                             />
                         </div>
@@ -40,7 +39,7 @@ const TeamForm = props => {
                                 type='email'
                                 name='email'
                                 placeholder='Enter email'
-                                value={ teamMember.email }
+                                value={ props.teamMember.email }
                                 onChange={ changeHandler }
 
                             />
@@ -55,7 +54,7 @@ const TeamForm = props => {
                                 type='text'
                                 name='role'
                                 placeholder='Enter role'
-                                value={ teamMember.role }
+                                value={ props.teamMember.role }
                                 onChange={ changeHandler }
                             />
                         </div>
